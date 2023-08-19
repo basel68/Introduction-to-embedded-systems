@@ -1,7 +1,7 @@
 include sources.mk
 
 # Platform Overrides
-PLATFORM=HOST
+platform=HOST
 pf=../include/common/platform.h
 
 # General Flags for all platforms
@@ -15,7 +15,7 @@ GEN_FLAGS = \
 TARGET = c1m2
 
 # Platform Dependant Variables
-ifeq ($(PLATFORM),MSP432)
+ifeq ($(platform),MSP432)
 	# MSP432 dependant build options
 	CPU = cortex-m4
 	ARCH = armv7e-m
