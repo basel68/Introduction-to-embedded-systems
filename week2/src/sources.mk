@@ -9,7 +9,7 @@
 #
 #*****************************************************************************
 
-ifeq($PLATFORM,MSP432)
+ifeq($(PLATFORM),MSP432)
 	# Add your Source files to this variable
 	SOURCES = *.c
 
