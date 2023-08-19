@@ -47,14 +47,14 @@ ifeq ($(Platform),MSP432)
 	LDFLAGS = -Wl,-Map=$(BASENAME).map $(LINKER_FILE) 
 	CFLAGS = -mcpu=$(CPU) -march=$(ARCH) --specs=$(SPECS) -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mthumb -Wall -Werror -O0 -g -std=c99
 	CPPFLAGs = -M -MF test.d
-	DEFINEFLAG = -DPLATFORM=$(PLATFORM)
+	DEFINEFLAG = -DPLATFORM=$(Platform)
 else	
 	CC = gcc
 # 	LD = 
 	LDFLAGS = -Wl,-Map=$(BASENAME).map
 	CFLAGS = -Wall -Werror -O0 -g -std=c99
 	CPPFLAGs = -M -MF test2.d
-	DEFINEFLAG = -DPLATFORM=$(PLATFORM)
+	DEFINEFLAG = -DPLATFORM=$(Platform)
 endif
 
 OBJS:= $(SOURCES:.c=.o)
@@ -71,7 +71,7 @@ OUTS:= $(SOURCES:.c=.out)
 	$(CC) $(DEFINEFLAG) $(CFLAGs) $(INCLUDES) -S $<  -o $@ 
 
 %.o:%.c
-	$(CC) $(DEFINEFLAG) $(CFLAGs) $(INCLUDES)-c $< -o $@  
+	$(CC) $(DEFINEFLAG) $(CFLAGs) -c $(INCLUDES) $< -o $@  
 
 
 .PHONY: compile-all
