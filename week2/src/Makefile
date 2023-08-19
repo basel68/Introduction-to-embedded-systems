@@ -82,7 +82,7 @@ $(TARGET).out: $(OBJS)
 
 # Generate the object file for all c-source files (but do not link) by specifying the object file you want to compile.
 %.o: %.c
-	$(CC) $(pf) $(CPPFLAGS) -c $<  $(CFLAGS)   
+	$(CC) -c $<  $(CFLAGS) $(pf) $(CPPFLAGS)  
 
 # Generate Dependancy files for each Source File
 %.d: %c
