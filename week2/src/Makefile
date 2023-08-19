@@ -1,35 +1,3 @@
-#******************************************************************************
-# Copyright (C) 2021 by Josh Illes
-#
-# Redistribution, modification or use of this software in source or binary
-# forms is permitted as long as the files maintain this copyright. Users are 
-# permitted to modify this and use it to learn about the field of embedded
-# software. Josh Illes is not liable for any misuse of this material. 
-#
-#*****************************************************************************
-
-#------------------------------------------------------------------------------
-# <Put a Description Here>
-#
-# Use: make [TARGET] [PLATFORM-OVERRIDES]
-#
-# Build Targets:
-#      <Put a description of the supported targets here>
-#
-# Platform Overrides:
-#      <Put a description of the supported Overrides here
-#
-#------------------------------------------------------------------------------
-
-# -c  Compile and Assemble File, Do Not Link
-# -o <FILE> Compile, Assemble, and Link to OUTPUT_FILE
-# -g  Generate Debugging Information in Executable
-# -Wall  Enable All Warning Messages
-# -Werror  Treat All Warnings as Errors
-# -I<DIR>  Include this <DIR> to look for header files
-# -ansi -std=STANDARD  Which standard version to use (ex: c89, c99)
-# -v  Verbose output form GCC
-
 include sources.mk
 
 # Platform Overrides
@@ -105,19 +73,19 @@ $(TARGET).out: $(OBJS)
 	
 # Generate Preprocesed output of all c-program implementation files (use the -E flag)
 %.i: %.c
-	$(CC) -E $(CFLAGS) $(CPPFLAGS) -o $@
+	$(CC) -E $< $(CFLAGS) $(CPPFLAGS) -o $@
 
 # Generate assembly output of c-program implementation files and the final output executable (Use the –S flag and the objdump utility).
 %.asm: %.c
-	$(CC) -S  $(CFLAGS) $(CPPFLAGS) -o $@
+	$(CC) -S $<  $(CFLAGS) $(CPPFLAGS) 
 
 # Generate the object file for all c-source files (but do not link) by specifying the object file you want to compile.
 %.o: %.c
-	$(CC) -c  $(CFLAGS) $(CPPFLAGS) -o $@
+	$(CC) -c $<  $(CFLAGS) $(CPPFLAGS) 
 
 # Generate Dependancy files for each Source File
 %.d: %c
-	$(CC) -E -M $<  $(CPPFLAGS) -o $@
+	$(CC) -E -M $<  $(CPPFLAGS) 
 
 # Compile all object files, but DO NOT link.
 compile-all: $(OBJS)
