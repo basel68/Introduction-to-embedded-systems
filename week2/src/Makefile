@@ -27,7 +27,7 @@ include sources.mk
 PLATFORM = MSP432
 BASENAME = c1m2
 # Architectures Specific Flags
-ifeq($PLATFORM,MSP432)
+ifeq ($(PLATFORM),MSP432)
 	LINKER_FILE = ../msp432p401r.lds 
 	CPU = cortex-m4
 	ARCH = armv7e-m
@@ -41,7 +41,7 @@ endif
 
 
 # Compiler Flags and Defines
-ifeq($PLATFORM,MSP432)
+ifeq ($(PLATFORM),MSP432)
 	CC = arm-none-eabi-gcc
 	LD = arm-none-eabi-ld
 	LDFLAGS = -Wl,-Map=$(BASENAME).map $(LINKER_FILE) 
@@ -80,7 +80,8 @@ compile-all: $(SOURCES)
 	$(CC) $(DEFINEFLAG) $(CFLAGS) -c $(SOURCES) -o $(OBJS)
 
 .PHONY: build
-build: $(OBJS)
+build: $(OUTS)
+$(OUTS):$(SOURCES)					
 	$(CC) $(DEFINEFLAG) $(CFLAGS) $(LDFLAGS) -o c1m2.out $^
 	size c1m2.out
 
