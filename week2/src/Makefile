@@ -24,10 +24,10 @@
 include sources.mk
 
 # Platform Overrides
-PLATFORM = MSP432
+Platform = MSP432
 BASENAME = c1m2
 # Architectures Specific Flags
-ifeq ($(PLATFORM),MSP432)
+ifeq ($(Platform),MSP432)
 	LINKER_FILE = ../msp432p401r.lds 
 	CPU = cortex-m4
 	ARCH = armv7e-m
@@ -41,20 +41,20 @@ endif
 
 
 # Compiler Flags and Defines
-ifeq ($(PLATFORM),MSP432)
+ifeq ($(Platform),MSP432)
 	CC = arm-none-eabi-gcc
 	LD = arm-none-eabi-ld
 	LDFLAGS = -Wl,-Map=$(BASENAME).map $(LINKER_FILE) 
 	CFLAGS = -mcpu=$(CPU) -march=$(ARCH) --specs=$(SPECS) -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mthumb -Wall -Werror -O0 -g -std=c99
 	CPPFLAGs = -M -MF test.d
-	DEFINEFLAG = -DMSP432
+	DEFINEFLAG = -DPLATFORM=$(PLATFORM)
 else	
 	CC = gcc
 # 	LD = 
 	LDFLAGS = -Wl,-Map=$(BASENAME).map
 	CFLAGS = -Wall -Werror -O0 -g -std=c99
 	CPPFLAGs = -M -MF test2.d
-	DEFINEFLAG = -DHost
+	DEFINEFLAG = -DPLATFORM=$(PLATFORM)
 endif
 
 OBJS:= $(SOURCES:.c=.o)
@@ -65,24 +65,24 @@ OUTS:= $(SOURCES:.c=.out)
 
 
 %.i:%.c
-	$(CC) $(DEFINEFLAG) $(CPPFLAGs) -E $< -o $@ 
+	$(CC) $(DEFINEFLAG) $(CPPFLAGs) $(INCLUDES) -E $< -o $@ 
 
 %.asm : %.c
-	$(CC) $(DEFINEFLAG) $(CFLAGs) -S $<  -o $@ 
+	$(CC) $(DEFINEFLAG) $(CFLAGs) $(INCLUDES) -S $<  -o $@ 
 
 %.o:%.c
-	$(CC) $(DEFINEFLAG) $(CFLAGs) -c $< -o $@  
+	$(CC) $(DEFINEFLAG) $(CFLAGs) $(INCLUDES)-c $< -o $@  
 
 
 .PHONY: compile-all
 compile-all: $(SOURCES)
 
-	$(CC) $(DEFINEFLAG) $(CFLAGS) -c $(SOURCES) -o $(OBJS)
+	$(CC) $(DEFINEFLAG) $(CFLAGS) $(INCLUDES) -c $(SOURCES) -o $(OBJS)
 
 .PHONY: build
 build: $(OUTS)
 $(OUTS):$(SOURCES)					
-	$(CC) $(DEFINEFLAG) $(CFLAGS) $(LDFLAGS) -o c1m2.out $^
+	$(CC) $(DEFINEFLAG) $(CFLAGS) $(LDFLAGS) $(INCLUDES) -o c1m2.out $^
 	size c1m2.out
 
 
