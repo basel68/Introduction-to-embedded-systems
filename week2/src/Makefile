@@ -105,15 +105,15 @@ $(TARGET).out: $(OBJS)
 	
 # Generate Preprocesed output of all c-program implementation files (use the -E flag)
 %.i: %.c
-	$(CC) -E $< $(CFLAGS) $(CPPFLAGS) -o $@
+	$(CC) -E $(CFLAGS) $(CPPFLAGS) -o $@
 
 # Generate assembly output of c-program implementation files and the final output executable (Use the –S flag and the objdump utility).
 %.asm: %.c
-	$(CC) -S $< $(CFLAGS) $(CPPFLAGS) -o $@
+	$(CC) -S  $(CFLAGS) $(CPPFLAGS) -o $@
 
 # Generate the object file for all c-source files (but do not link) by specifying the object file you want to compile.
 %.o: %.c
-	$(CC) -c $< $(CFLAGS) $(CPPFLAGS) -o $@
+	$(CC) -c  $(CFLAGS) $(CPPFLAGS) -o $@
 
 # Generate Dependancy files for each Source File
 %.d: %c
