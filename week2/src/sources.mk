@@ -9,11 +9,7 @@
 #
 #*****************************************************************************
 
-<<<<<<< HEAD
-ifeq($(PLATFORM),MSP432)
-=======
 ifeq ($(PLATFORM),MSP432)
->>>>>>> 14932375313134678519ea6a29f727ab65f86e47
 	# Add your Source files to this variable
 	SOURCES = *.c
 
@@ -29,7 +25,7 @@ ifeq ($(PLATFORM),MSP432)
 	   	../include/msp432/msp_compatibility.h \
 		../include/msp432/system_msp432p401r.h
 else
-	SOURCES = main.c \  memory.c
+	SOURCES = main.c  memory.c
 
 	INCLUDES =../include/common/memory.h \
 		../include/common/platform.h
