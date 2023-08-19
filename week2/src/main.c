@@ -22,8 +22,25 @@
  */
 
 #include "memory.h"
-#include "platform.h"
+// #include "platform.h"
 #define MAX_LENGTH (10)
+
+
+#if defined (MSP432)
+#include "msp432p401r.h"
+#define PRINTF(...)
+/******************************************************************************
+ Platform - HOST
+******************************************************************************/
+#elif defined (HOST)
+#include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+/******************************************************************************
+ Platform - Unsupported
+******************************************************************************/
+#else
+#error "Platform provided is not supported in this Build System"
+#endif
 char buffer[MAX_LENGTH];
 
 /* A pretty boring main file */
