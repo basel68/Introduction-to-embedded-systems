@@ -2,6 +2,7 @@ include sources.mk
 
 # Platform Overrides
 PLATFORM=HOST
+pf=../include/common/platform.h
 
 # General Flags for all platforms
 GEN_FLAGS = \
@@ -81,7 +82,7 @@ $(TARGET).out: $(OBJS)
 
 # Generate the object file for all c-source files (but do not link) by specifying the object file you want to compile.
 %.o: %.c
-	$(CC) -c $<  $(CFLAGS) $(CPPFLAGS) 
+	$(CC) -c $<  $(CFLAGS) $(pf) $(CPPFLAGS)  
 
 # Generate Dependancy files for each Source File
 %.d: %c
