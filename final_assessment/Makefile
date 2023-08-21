@@ -5,8 +5,7 @@ platform=HOST
 
 
 # General Flags for all platforms
-GEN_FLAGS = \
-			-Wall \
+GEN_FLAGS = -Wall \
 			-Werror \
 			-g \
 			-O0 \
@@ -22,10 +21,12 @@ ifeq ($(platform),MSP432)
 
 	SOURCES+= 	./startup_msp432p401r_gcc.c \
 				./system_msp432p401r.c \
-				./interrupts_msp432p401r_gcc.c
+				./interrupts_msp432p401r_gcc.c\
+				./stats.c
 	
 	INCLUDES+= 	-I ../include/CMSIS/ \
 				-I ../include/msp432/
+
 
 	# Compiler
 	CC = arm-none-eabi-gcc
@@ -82,7 +83,7 @@ $(TARGET).out: $(OBJS)
 
 # Generate the object file for all c-source files (but do not link) by specifying the object file you want to compile.
 %.o: %.c
-	$(CC) -c $<  $(CFLAGS) -I../include/common/*.h  $(CPPFLAGS)  
+	$(CC) -c $<  $(CFLAGS)  $(CPPFLAGS)  
 
 # Generate Dependancy files for each Source File
 %.d: %c
