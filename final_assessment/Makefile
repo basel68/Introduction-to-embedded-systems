@@ -24,8 +24,6 @@ ifeq ($(platform),MSP432)
 				./interrupts_msp432p401r_gcc.c\
 				./stats.c
 	
-	INCLUDES+= 	-I ../include/CMSIS/ \
-				-I ../include/msp432/
 
 
 	# Compiler
