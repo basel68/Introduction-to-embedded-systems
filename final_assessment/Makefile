@@ -62,7 +62,7 @@ build: $(TARGET).out
 
 $(TARGET).out: $(OBJS)
 	$(CC) $(OBJS) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@
-	$(SIZE) $@
+	$(SIZE) -Atd $@
 	
 # Generate Preprocesed output of all c-program implementation files (use the -E flag)
 %.i: %.c
