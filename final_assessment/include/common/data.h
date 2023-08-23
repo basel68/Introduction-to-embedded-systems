@@ -12,7 +12,7 @@
 
 #ifndef __data_H__
 #define __data_H__
-
+#include <stdint.h>  
 #include <math.h>
 
 /**
