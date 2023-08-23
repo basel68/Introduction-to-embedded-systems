@@ -23,6 +23,7 @@
  */
 
 #include "memory.h"
+#include "Makefile"
 #include "platform.h"
 #include "stats.h"
 #include "data.h"
