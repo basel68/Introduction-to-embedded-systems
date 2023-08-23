@@ -10,18 +10,18 @@
 #*****************************************************************************
 
 ifeq ($(PLATFORM),MSP432)
-	SOURCES = src/*.c
+	SOURCES = *.c
 
-	INCLUDES = ../include/CMSIS \
-	   	../include/common \
-	   	../include/msp432
+	INCLUDES = ./include/CMSIS \
+	    	./include/common \
+	    	./include/msp432
 
 else
-	SOURCES = src/main.c \
-		  src/memory.c \
-		  src/data.c \
-		  src/stats.c \
-		  src/course1.c
+	SOURCES = main.c \
+		  memory.c \
+		  data.c \
+		  stats.c \
+		  course1.c
 
-	INCLUDES = ../include/common
+	INCLUDES = ./include/common
 endif
