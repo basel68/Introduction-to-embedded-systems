@@ -20,7 +20,7 @@ ifeq ($(PLATFORM),MSP432)
 	   	./include/CMSIS/core_cmInstr.h \
 	   	./include/CMSIS/core_cmSimd.h \
 	   	./include/common/memory.h \
-	   	./include/common/platform.h \
+	   	./platform.h \
 		./include/common/stats.h \
 		./include/common/data.h \
 		./include/common/course1.h \
@@ -35,7 +35,7 @@ else
 	  course1.c 
 
 	INCLUDES =./include/common/memory.h \
-	   	./include/common/platform.h \
+	   	./platform.h \
 		./include/common/stats.h \
 		./include/common/data.h \
 		./include/common/course1.h \
