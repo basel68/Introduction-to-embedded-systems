@@ -23,12 +23,7 @@
 #include "memory.h"
 #include "data.h"
 #include "stats.h"
-int main(void) {
-  #ifdef COURSE1
-  course1();
-  #endif
-  return 0;
-}
+
 int8_t course1(){
   test_data1();
   test_data2();
