@@ -72,16 +72,13 @@ $(TARGET).out: $(OBJS)
 %.asm: %.c
 	$(CC) -S $<  $(CFLAGS) $(CPPFLAGS) 
 
-%.d: %.c
-    $(CC) -M $(CPPFLAGS) $< 
-
 # Generate the object file for all c-source files (but do not link) by specifying the object file you want to compile.
 %.o: %.c
 	$(CC) -c $<  $(CFLAGS)  $(CPPFLAGS)  
 
 # Generate Dependancy files for each Source File
 %.d: %c
-	$(CC) -E -M $<  $(CPPFLAGS) 
+	$(CC) -M $<  $(CPPFLAGS) 
 
 # Compile all object files, but DO NOT link.
 compile-all: $(OBJS)
