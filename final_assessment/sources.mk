@@ -22,14 +22,22 @@ ifeq ($(PLATFORM),MSP432)
 	   	./include/common/memory.h \
 	   	./include/common/platform.h \
 		./include/common/stats.h \
+		./include/common/data.h \
+		./include/common/course1.h \
 	   	./include/msp432/msp432p401r.h \
 	   	./include/msp432/msp_compatibility.h \
 		./include/msp432/system_msp432p401r.h
 else
-	SOURCES = main.c  memory.c stats.c
+	SOURCES = main.c \
+	 memory.c \
+	  stats.c \
+	  data.c \
+	  course1.c 
 
 	INCLUDES =./include/common/memory.h \
 	   	./include/common/platform.h \
-		./include/common/stats.h 
+		./include/common/stats.h \
+		./include/common/data.h \
+		./include/common/course1.h \
 
 endif

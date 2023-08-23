@@ -18,6 +18,7 @@
  *
  * @author Alex Fosdick
  * @date April 1 2017
+  @edited 22/8/2023 by Bassel Mohamed
  *
  */
 #include "memory.h"
@@ -47,4 +48,58 @@ void set_all(char * ptr, char value, unsigned int size){
 void clear_all(char * ptr, unsigned int size){
   set_all(ptr, 0, size);
 }
+uint8 * my_memmove(uint8 * src, uint8 * dst, uint8 length){
+	
+	uint8 datatoMove[length];
+
+	my_memcopy(src, datatoMove, length);
+	
+	
+	my_memcopy(datatoMove, dst, length);
+   
+  return dst;
+}
+uint8 * my_memcopy(uint8 * src, uint8 * dst, uint8 length){
+
+for(int count=0;count<length;count++){
+  *(dst+count)=*(src+count);
+}
+
+return dst;
+}
+uint8 * my_memset(uint8 * src, uint8 length, uint8 value){
+    for (int cellCount=0; cellCount<length; cellCount++){
+        *(src+cellCount) = value;
+    }
+    return src;
+}
+
+uint8 * my_memzero(uint8 * src, uint8 length){
+     for (int cellCount=0; cellCount<length; cellCount++){
+        *(src+cellCount) = 0;
+    }
+    return src;
+}
+
+uint8 * my_reverse(uint8 * src, uint8 length){
+    uint8 numberOfSwapOperations = length/2;
+    uint8 temp=0;
+    for (int counter=0; counter<numberOfSwapOperations; counter++){
+        temp = *(src + counter);
+        *(src+counter) = *(src+length-1-counter);
+        *(src+length-1-counter) = temp;
+    }
+    return src;
+}
+
+int32 * reserve_words(uint8 length){
+  int32 dynamic_loc=(int32 *) malloc(length);
+  
+  return (dynamic_loc);
+    
+}
+void free_words(int32 * src){
+    free((void *)src);
+}
+
 

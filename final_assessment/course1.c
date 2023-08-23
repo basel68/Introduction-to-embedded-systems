@@ -14,7 +14,7 @@
  *
  * @author Alex Fosdick
  * @date April 2, 2017
- *
+ *@edited 22/8/2023 by Bassel Mohamed
  */
 
 #include <stdint.h>
@@ -23,7 +23,17 @@
 #include "memory.h"
 #include "data.h"
 #include "stats.h"
-
+int8_t course1(){
+  test_data1();
+  test_data2();
+  test_memmove1();
+  test_memmove2();
+  test_memmove3();
+  test_memcopy();
+  test_memset();
+  test_reverse();
+  return 0;
+}
 int8_t test_data1() {
   uint8_t * ptr;
   int32_t num = -4096;

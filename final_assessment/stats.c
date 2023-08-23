@@ -16,7 +16,7 @@
  *
  * @author <Add FirsName LastName>
  * @date <Add date >
- *
+ *@edited 22/8/2023 by Bassel Mohamed
  */
 
 
@@ -75,10 +75,15 @@ float find_mean (char *ptr, int count){
 
 
 void print_array (char *ptr,int count){
-  for (int i=0; i<count; i++){
-    printf("%d,", *(ptr + i));
-  }
-  printf("\n");
+  #ifdef VERBOSE
+
+    for (int i=0; i<count; i++){
+       printf("%d,", *(ptr + i));
+    }
+    printf("\n");
+
+  #endif
+ 
 }
 int find_median (char *ptr, int count){
   unsigned char median = 0;
