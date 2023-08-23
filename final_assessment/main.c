@@ -22,11 +22,11 @@
  *
  */
 
-#include "./include/*.h"
-// #include "platform.h"
-// #include "stats.h"
-// #include "data.h"
-// #include "course1.h"
+#include "memory.h"
+#include "platform.h"
+#include "stats.h"
+#include "data.h"
+#include "course1.h"
 
 #define MAX_LENGTH (10)
 
