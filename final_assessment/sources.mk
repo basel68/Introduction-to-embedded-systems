@@ -9,36 +9,19 @@
 #
 #*****************************************************************************
 
-# ifeq ($(PLATFORM),MSP432)
-# 	# Add your Source files to this variable
-# 	SOURCES = *.c
+ifeq ($(PLATFORM),MSP432)
+	SOURCES = src/*.c
 
-# 	# Add your include paths to this variable
-# 	INCLUDES = ./include/CMSIS/cmsis_gcc.h \
-# 	   	./include/CMSIS/core_cm4.h \
-# 	   	./include/CMSIS/core_cmFunc.h \
-# 	   	./include/CMSIS/core_cmInstr.h \
-# 	   	./include/CMSIS/core_cmSimd.h \
-# 	   	./include/common/memory.h \
-# 	   	./platform.h \
-# 		./include/common/stats.h \
-# 		./include/common/data.h \
-# 		./include/common/course1.h \
-# 	   	./include/msp432/msp432p401r.h \
-# 	   	./include/msp432/msp_compatibility.h \
-# 		./include/msp432/system_msp432p401r.h \
+	INCLUDES = ../include/CMSIS \
+	   	../include/common \
+	   	../include/msp432
 
+else
+	SOURCES = src/main.c \
+		  src/memory.c \
+		  src/data.c \
+		  src/stats.c \
+		  src/course1.c
 
-	SOURCES = main.c \
-	 memory.c \
-	  stats.c \
-	  data.c \
-	  course1.c 
-
-	INCLUDES =./include/common/memory.h \
-	   	./platform.h \
-		./include/common/stats.h \
-		./include/common/data.h \
-		./include/common/course1.h \
-
-# endif
+	INCLUDES = ../include/common
+endif

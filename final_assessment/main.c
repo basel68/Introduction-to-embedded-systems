@@ -23,10 +23,11 @@
  */
 
 #include "memory.h"
-#include stats.h
-#include data.h
-#include course1.h
-#include platform.h
+#include "platform.h"
+#include "stats.h"
+#include "data.h"
+#include "course1.h"
+
 #define MAX_LENGTH (10)
 
 char buffer[MAX_LENGTH];
