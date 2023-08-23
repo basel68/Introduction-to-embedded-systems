@@ -45,7 +45,7 @@ else
 	# @echo Host platform detected
 	CC = gcc
 	CFLAGS = $(GEN_FLAGS)
-	CPPFLAGS = -DHOST $(INCLUDES)
+	CPPFLAGS = -DHOST -DCOURSE1 $(INCLUDES)
 	SIZE = size
 
 endif
