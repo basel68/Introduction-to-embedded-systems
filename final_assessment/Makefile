@@ -1,103 +1,89 @@
-#------------------------------------------------------------------------------
-# This fie is the Makefile based on the C1M2 & C1M1 module in embedded software course in
-# Coursera. It performs the build process management
-#
-# Use: make [TARGET] [PLATFORM-OVERRIDES]
-#
-# Build Targets:
-# 1. %.i
-# 2. %.asm
-# 3. %.o
-# 4. compile-all
-# 5. build_stats_o
-# 6. clean
-#
-# Platform Overrides:
-#      MSP432, HOST
-#------------------------------------------------------------------------------
-
 include sources.mk
 
-TEST_CASE1 = test_1
-BASENAME = c1m4
-TARGET = $(BASENAME).out
-RM = rm -rf
-CC = gcc
-LD = ld
+# Platform Overrides
+platform=HOST
 
-CFLAGS   = -Wall -Werror -g -O0 -std=c99 -MD
-LDFLAGS  = -Wl,-Map=$(BASENAME).map 	
-OBJDUMP  = objdump
-SIZE     = size
 
-# Architectures Specific Flags
-LINKER_FILE = msp432p401r.lds
-CPU = cortex-m4
-ARCH = armv7e-m
-FLOAT_ABI = hard
-FPU = fpv4-sp-d16
-SPECS = nosys.specs
+# General Flags for all platforms
+GEN_FLAGS = -Wall \
+			-Werror \
+			-g \
+			-O0 \
+			-std=c99
 
-# Compiler Flags and Defines
-ifeq ($(PLATFORM),HOST)
-	CC = gcc
-	DUMP = objdump
-	SIZE = size
-	LDFLAGS = -Wl,-Map=$(TARGET).map
-	SIZE = size
-	CFLAGS = -Wall -Werror -g -O0 -std=c99 -MD
-	# etc
-else
+TARGET = c1m2
+INCLUDES+= ./platform.h 
+
+# Platform Dependant Variables
+ifeq ($(platform),MSP432)
+	# MSP432 dependant build options
+	CPU = cortex-m4
+	ARCH = armv7e-m
+	# Compiler
 	CC = arm-none-eabi-gcc
-	DUMP = arm-none-eabi-objdump
+
+	# Linker
 	LD = arm-none-eabi-ld
 	SIZE = arm-none-eabi-size
+
+	# Linker Flags
+	LINKER_FILE = ../msp432p401r.lds
 	LDFLAGS = -Wl,-Map=$(TARGET).map -T $(LINKER_FILE)
-	CFLAGS = -mcpu=$(CPU) -mthumb -march=$(ARCH) -mfloat-abi=$(FLOAT_ABI) -mfpu=$(FPU) --specs=$(SPECS) -Wall -Werror -g -O0 -std=c99 -MD
-	# etc
+	
+	# Compiler Flags
+	CFLAGS = 	$(GEN_FLAGS) \
+				-mcpu=$(CPU) \
+				-mthumb \
+				-march=$(ARCH) \
+				-mfloat-abi=hard \
+				-mfpu=fpv4-sp-d16\
+				--specs=nosys.specs
+	CPPFLAGS = -DMSP432 $(INCLUDES)
+
+
+else
+	# @echo Host platform detected
+	CC = gcc
+	CFLAGS = $(GEN_FLAGS)
+	CPPFLAGS = -DHOST -DCOURSE1 $(INCLUDES)
+	SIZE = size
+
 endif
 
-OBJS = $(SOURCES:.c=.o)
+PREP = $(SOURCES:.c=.i)	# Preprocessor Files
+DEPS = $(SOURCES:.c=.d)	# Dependancy Files
+ASMS = $(SOURCES:.c=.asm)	# Assembly Files
+OBJS = $(SOURCES:.c=.o)	# Object files
 
-%.o: %.c 
-	@echo 'objects created'
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ -D$(PLATFORM) -D$(COURSE) -DVERBOSE 
+.PHONY: compile-all build clean
+
+# Compile all object files and link into a final executable.
+build: $(TARGET).out
+
+$(TARGET).out: $(OBJS)
+	$(CC) $(OBJS) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@
+	$(SIZE) $@
 	
-%.i : %.c 
-	@echo 'preprocessors created'
-	$(CC) $(CFLAGS) $(INCLUDES) -E $< -o $@ -D$(PLATFORM) -D$(COURSE) -DVERBOSE 
+# Generate Preprocesed output of all c-program implementation files (use the -E flag)
+%.i: %.c
+	$(CC) -E $< $(CFLAGS) $(CPPFLAGS) -o $@
 
-%.asm : %.c 
-	@echo 'asm created'
-	$(CC) $(CFLAGS) $(INCLUDES) -S $< -o $@ -D$(PLATFORM) -D$(COURSE) -DVERBOSE
+# Generate assembly output of c-program implementation files and the final output executable (Use the –S flag and the objdump utility).
+%.asm: %.c
+	$(CC) -S $<  $(CFLAGS) $(CPPFLAGS) 
 
-%.s : %.out 
-	@echo 's created'
-	$(DUMP) -S -D $< -D$(PLATFORM) -D$(COURSE)
+# Generate the object file for all c-source files (but do not link) by specifying the object file you want to compile.
+%.o: %.c
+	$(CC) -c $<  $(CFLAGS)  $(CPPFLAGS)  
 
-# do not link
-.PHONY: compile-all
+# Generate Dependancy files for each Source File
+%.d: %c
+	$(CC) -E -M $<  $(CPPFLAGS) 
+
+# Compile all object files, but DO NOT link.
 compile-all: $(OBJS)
 
-.PHONY: all
-all: $(TARGET)
-
-# link with dump
-$(TARGET): compile-all
-	@echo 'compile all'
-	$(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) -o $@ -D$(PLATFORM) -D$(COURSE) -DVERBOSE
-	$(SIZE) $@
-
-#test 
-.PHONY: build_stats_o
-build_stats_o: 
-	$(CC) $(CFLAGS) $(INCLUDES) -c $(SRC_FOLDER)/stats.c -o $(SRC_FOLDER)/stats.o
-
-
-.PHONY: clean
-clean: 
-	$(RM) $(SRC_FOLDER)/*.o $(SRC_FOLDER)/*.d $(SRC_FOLDER)/*.out *.map *.exe *.out
-
-.PHONY: run
-run:
-	$(TARGET_FOLDER)/$(TARGET)
+clean:
+	# This should remove all compiled objects, preprocessed outputs, assembly outputs, executable files and build output files.
+	@echo Removing all built files
+	rm -f *.out *.map *.o *.asm *.i
