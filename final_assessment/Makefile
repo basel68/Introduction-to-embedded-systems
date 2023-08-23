@@ -77,7 +77,7 @@ $(TARGET).out: $(OBJS)
 	$(CC) -c $<  $(CFLAGS)  $(CPPFLAGS)  
 
 # Generate Dependancy files for each Source File
-%.d: %c
+%.d: %.c
 	$(CC) -M $<  $(CPPFLAGS) 
 
 # Compile all object files, but DO NOT link.
