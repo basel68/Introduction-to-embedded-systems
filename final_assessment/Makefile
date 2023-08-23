@@ -60,7 +60,7 @@ OBJS = $(SOURCES:.c=.o)	# Object files
 # Compile all object files and link into a final executable.
 build: $(TARGET).out
 
-$(TARGET).o: $(OBJS)
+$(TARGET).out: $(OBJS)
 	$(CC) $(OBJS) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@
 	$(SIZE) $@
 	
