@@ -61,8 +61,8 @@ OBJS = $(SOURCES:.c=.o)	# Object files
 build: $(TARGET).out
 
 $(TARGET).out: $(OBJS)
-	@echo $(SOURCES) $(INCLUDES)
-	$(CC) $(OBJS) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@
+	
+	$(CC) $(OBJS) $(INCLUDES) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@
 	$(SIZE) -Atd $@
 	
 # Generate Preprocesed output of all c-program implementation files (use the -E flag)
@@ -75,7 +75,7 @@ $(TARGET).out: $(OBJS)
 
 # Generate the object file for all c-source files (but do not link) by specifying the object file you want to compile.
 %.o: %.c
-	$(CC) -c $<  $(CFLAGS)  $(CPPFLAGS)  
+	$(CC) -c $< $(INCLUDES)  $(CFLAGS)  $(CPPFLAGS)  
 
 # Generate Dependancy files for each Source File
 %.d: %.c
