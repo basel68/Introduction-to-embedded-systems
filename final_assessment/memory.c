@@ -48,9 +48,9 @@ void set_all(char * ptr, char value, unsigned int size){
 void clear_all(char * ptr, unsigned int size){
   set_all(ptr, 0, size);
 }
-uint8 * my_memmove(uint8 * src, uint8 * dst, uint8 length){
+uint8_t * my_memmove(uint8_t * src, uint8_t * dst, uint8_t length){
 	
-	uint8 datatoMove[length];
+	uint8_t datatoMove[length];
 
 	my_memcopy(src, datatoMove, length);
 	
@@ -59,7 +59,7 @@ uint8 * my_memmove(uint8 * src, uint8 * dst, uint8 length){
    
   return dst;
 }
-uint8 * my_memcopy(uint8 * src, uint8 * dst, uint8 length){
+uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, uint8_t length){
 
 for(int count=0;count<length;count++){
   *(dst+count)=*(src+count);
@@ -67,23 +67,23 @@ for(int count=0;count<length;count++){
 
 return dst;
 }
-uint8 * my_memset(uint8 * src, uint8 length, uint8 value){
+uint8_t * my_memset(uint8_t * src, uint8_t length, uint8_t value){
     for (int cellCount=0; cellCount<length; cellCount++){
         *(src+cellCount) = value;
     }
     return src;
 }
 
-uint8 * my_memzero(uint8 * src, uint8 length){
+uint8_t * my_memzero(uint8_t * src, uint8_t length){
      for (int cellCount=0; cellCount<length; cellCount++){
         *(src+cellCount) = 0;
     }
     return src;
 }
 
-uint8 * my_reverse(uint8 * src, uint8 length){
-    uint8 numberOfSwapOperations = length/2;
-    uint8 temp=0;
+uint8_t * my_reverse(uint8_t * src, uint8_t length){
+    uint8_t numberOfSwapOperations = length/2;
+    uint8_t temp=0;
     for (int counter=0; counter<numberOfSwapOperations; counter++){
         temp = *(src + counter);
         *(src+counter) = *(src+length-1-counter);
@@ -92,13 +92,13 @@ uint8 * my_reverse(uint8 * src, uint8 length){
     return src;
 }
 
-int32 * reserve_words(uint8 length){
-  int32 dynamic_loc=(int32 *) malloc(length);
+int32_t * reserve_words(uint8_t length){
+  int32_t dynamic_loc=(int32_t *) malloc(length);
   
   return (dynamic_loc);
     
 }
-void free_words(int32 * src){
+void free_words(int32_t * src){
     free((void *)src);
 }
 
