@@ -28,7 +28,7 @@
  *
  * @return length of the converted data.
  */
-uint8 my_itoa(int32 data, uint8 * ptr, uint32 base);
+uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base);
 
 /**
  * @brief Converts given data from ASCII string to integer
@@ -43,7 +43,7 @@ uint8 my_itoa(int32 data, uint8 * ptr, uint32 base);
  *
  * @return the converted integer.
  */
-int32 my_atoi(uint8 * ptr, uint8 digits, uint32 base);
+int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base);
 
 /**
  * @brief Calculates the power of a nymber
@@ -53,5 +53,5 @@ int32 my_atoi(uint8 * ptr, uint8 digits, uint32 base);
  *
  * @return the result.
  */
-int32 powerFunction(int32 number, uint8 power);
+int32_t powerFunction(int32_t number, uint8_t power);
 #endif

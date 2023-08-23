@@ -15,11 +15,11 @@
 #include "platform.h"
 
 
-uint8 my_itoa(int32 data, uint8 * ptr, uint32 base)
+uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base)
 {
-  uint8 isNegative= 0;
-  uint8 digitCounter= 0;
-  uint8 remainder= 0;  
+  uint8_t isNegative= 0;
+  uint8_t digitCounter= 0;
+  uint8_t remainder= 0;  
 
   // Check if data is zero
   if (data == 0)
@@ -58,10 +58,10 @@ uint8 my_itoa(int32 data, uint8 * ptr, uint32 base)
   return digitCounter;
 }
 
-int32 my_atoi(uint8 * ptr, uint8 digits, uint32 base)
+int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base)
 {
-  int32 number = 0;
-  uint8 isNegative = 0;
+  int32_t number = 0;
+  uint8_t isNegative = 0;
 
   // Check sign
   if(*ptr == '-')
