@@ -61,6 +61,7 @@ OBJS = $(SOURCES:.c=.o)	# Object files
 build: $(TARGET).out
 
 $(TARGET).out: $(OBJS)
+	@echo $(SOURCES) $(INCLUDES)
 	$(CC) $(OBJS) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@
 	$(SIZE) -Atd $@
 	
