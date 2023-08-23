@@ -23,5 +23,5 @@ else
 		  stats.c \
 		  course1.c
 
-	INCLUDES = ./include/common
+	INCLUDES = ./include/common/*.h
 endif
