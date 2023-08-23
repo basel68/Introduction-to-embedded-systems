@@ -26,7 +26,7 @@ ifeq ($(PLATFORM),MSP432)
 		./include/common/course1.h \
 	   	./include/msp432/msp432p401r.h \
 	   	./include/msp432/msp_compatibility.h \
-		./include/msp432/system_msp432p401r.h
+		./include/msp432/system_msp432p401r.h \
 else
 	SOURCES = main.c \
 	 memory.c \

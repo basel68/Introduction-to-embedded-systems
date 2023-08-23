@@ -12,6 +12,7 @@ GEN_FLAGS = -Wall \
 			-std=c99
 
 TARGET = c1m2
+INCLUDES+= ./platform.h 
 
 # Platform Dependant Variables
 ifeq ($(platform),MSP432)
