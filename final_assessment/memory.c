@@ -22,6 +22,7 @@
  *
  */
 #include "memory.h"
+#include "platform.h"
 
 /***********************************************************
  Function Definitions
