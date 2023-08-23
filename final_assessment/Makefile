@@ -18,16 +18,6 @@ ifeq ($(platform),MSP432)
 	# MSP432 dependant build options
 	CPU = cortex-m4
 	ARCH = armv7e-m
-
-	SOURCES+= 	./startup_msp432p401r_gcc.c \
-				./system_msp432p401r.c \
-				./interrupts_msp432p401r_gcc.c\
-				./stats.c
-	
-	INCLUDES+= 	-I ../include/CMSIS/ \
-				-I ../include/msp432/
-
-
 	# Compiler
 	CC = arm-none-eabi-gcc
 
